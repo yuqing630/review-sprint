@@ -13,7 +13,7 @@ exports.seed = function(knex, Promise) {
     knex('goals').del(),
 
     knex('goals').insert({user_id: 1, description: 'sleep', complete: 'false'}),
-    knex('goals').insert({user_id: 2, description: 'eat', complete: 'false'})
+    knex('goals').insert({user_id: 1, description: 'eat', complete: 'false'})
     // knex('goals').insert({user_id: 2, description: 'eat', complete: 'false'})
   )
 };

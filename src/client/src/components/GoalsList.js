@@ -5,46 +5,32 @@ import Goals from './Goals.js'
 class GoalsList extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      post: []
-    }
-    this.onClick=this.onClick.bind(this)
+    // this.state = {
+    //   post: []
+    // }
+    // this.onClick=this.onClick.bind(this)
   }
 
-  componentDidMount(){
-    axios.get('/goals')
-    .then((response)=>{
-      // console.log(response.data)
-      this.setState({
-        post: response.data
-      })
-    })
-    .catch((err)=>{
-      console.log(err, 'err getting mountdata')
-    })
-  }
 
-  onClick(){
-    axios.post('/complete')
-    .then((response)=>{
-      console.log('change')
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
 
-  }
+  // <div onClick={()=>{this.props.onClick()}}>{goal.description}
+  //
+  // </div>
 
   render(){
-    console.log(this.state.post)
+    // console.log(this.props.post)
     return(
-      <div>
-      {this.state.post.map((goal,i)=>{
-        console.log(goal)
+      <div>GOALS
+
+      {this.props.post.map((goal,i)=>{
+        // console.log(goal)
         return(
-          <div onClick={()=>{this.onClick()}}>{goal.description}
-          <button></button>
-          </div>
+         <Goals
+         key={i}
+         id={goal.id}
+         description={goal.description}
+         onClick={this.props.onClick}
+         />
         )
       })}
 

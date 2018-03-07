@@ -32,6 +32,7 @@ class GoalForm extends React.Component {
   render(){
   return (
     <div>
+    What is your goal?
     <form name="goal-form">
       <input type='text' value={this.state.userInput} placeholder='GOAL' onChange={(e)=>{this.handleChange(e)}}></input>
       <button onClick={()=>{this.handleSubmit()}}>Submit</button>
