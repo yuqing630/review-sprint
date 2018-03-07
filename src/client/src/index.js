@@ -1,19 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GoalForm from './components/GoalsForm.js'
-import GoalsList from './components/GoalsList.js'
+import GoalForm from './GoalsForm.js'
+import GoalsList from './GoalsList.js'
 import axios from 'axios'
+import { Switch, Route, Link } from 'react-router-dom'
 
-class App extends React.Component{
+
+class Home extends React.Component{
   constructor(props) {
     super(props)
     this.state={
       post: []
     }
     this.onClick = this.onClick.bind(this)
+    this.getData = this.getData.bind(this)
   }
 
-  componentDidMount(){
+  getData(){
     axios.get('/goals')
     .then((response)=>{
       // console.log(response.data)
@@ -25,8 +28,12 @@ class App extends React.Component{
       console.log(err, 'err getting mountdata')
     })
   }
+
+  componentDidMount(){
+    this.getData()
+  }
   onClick(id){
-    console.log(id)
+    // console.log(id)
     axios.post('/complete', {id: id})
     .then((response)=>{
       // console.log('change')
@@ -44,13 +51,13 @@ class App extends React.Component{
  render(){
    return(
      <div>
-     <div>
+      <li><Link to='/'>Home</Link></li>
+      <li><Link to='/Completed'>Complete Goal</Link></li>
+
        <h1>Goalposts</h1>
-       <GoalForm />
-     </div>
-     <div>
+       <GoalForm getData = {this.getData}/>
+
         <GoalsList post={this.state.post} onClick = {this.onClick}/>
-     </div>
      </div>
    )
  }
@@ -58,4 +65,5 @@ class App extends React.Component{
 }
 
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+// ReactDOM.render(<Home />, document.getElementById('root'));
+export default Home;

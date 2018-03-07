@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import Goals from './Goals.js'
+import CompletedGoal from './CompletedGoal.js'
 
-class GoalsList extends React.Component{
+class CompletedList extends React.Component{
   constructor(props){
     super(props)
     // this.state = {
@@ -20,16 +20,16 @@ class GoalsList extends React.Component{
   render(){
     // console.log(this.props.post)
     return(
-      <div>GOALS
+      <div>Completed Goals
 
       {this.props.post.map((goal,i)=>{
-        // console.log(goal)
+        // console.log('insidemap', goal)
         return(
-         <Goals
+         <CompletedGoal
          key={i}
          id={goal.id}
-         description={goal.description}
-         onClick={this.props.onClick}
+         title={goal.title}
+        //  onClick={this.props.onClick}
          />
         )
       })}
@@ -39,4 +39,4 @@ class GoalsList extends React.Component{
   }
 }
 
-export default GoalsList;
+export default CompletedList;

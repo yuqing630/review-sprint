@@ -11,6 +11,7 @@ exports.up = function(knex, Promise) {
   knex.schema.createTableIfNotExists('goals', function (table) {
     table.increments('id').primary().unsigned();
     table.integer('user_id').references('id').inTable('users').notNull();
+    table.string('title');
     table.string('description');
     table.boolean('complete')
   })

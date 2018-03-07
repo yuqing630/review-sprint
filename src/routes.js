@@ -10,6 +10,7 @@ var goal = require('./models/goal')
 
 router.get('/goals', goal.findById)
 
+router.get('/Completed', goal.findByComplete)
 
 router.get('/goals/id', goal.findByUserID)
 
