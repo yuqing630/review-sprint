@@ -3,8 +3,9 @@ var db = require('./db');
 var Goal = {};
 
 // TODO: ADD MORE MODEL FUNCTIONS HERE
-Goal.addGoals = function(user_id, decsription, res) {
-  db('goals').insert({user_id: 3  , description: 'doing solo sprint'})
+Goal.addGoals = function(req, res) {
+  // console.log(req.body.data)
+  db('goals').insert({user_id: 3  , description: req.body.data, complete:'false'})
   .then((response)=>{
     console.log('add to db goal')
     res.send()
@@ -16,7 +17,7 @@ Goal.addGoals = function(user_id, decsription, res) {
 Goal.findById = function(req,res) {
   // console.log(req, res)
   // console.log(db)
-  db('goals').where({ id: 3 }).select('*')
+  db('goals').select('*')
     .then(function(goal) {
       // console.log(goal)
       res.send(goal)

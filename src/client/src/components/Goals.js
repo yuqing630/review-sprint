@@ -1,20 +1,34 @@
 import React from 'react';
+import axios from 'axios';
 
-const Goals = (props) => {
-  return (
-    <div id="goals">
-      <h1>My Goals</h1>
+class Goals extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      post: []
+    }
+  }
 
-      <ol>
-        {/*
-        TODO:
-          - Show the users goals here
-          - Each Goal should be accompanied by a "Complete Goal" button
-        */}
-      </ol>
+  componentDidMount(){
+    axios.get('/goals')
+    .then((response)=>{
+      console.log(response.data)
+      this.setState({
+        post: response.data
+      })
+    })
+    .catch((err)=>{
+      console.log(err, 'err getting mountdata')
+    })
+  }
+  render(){
+    return(
+      <div>
 
-    </div>
-  );
+
+      </div>
+    )
+  }
 }
 
 export default Goals;

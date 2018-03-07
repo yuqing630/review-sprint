@@ -4,6 +4,7 @@ module.exports = {
     // TODO: ADD CONNECTION INFO
     client: 'sqlite3',
     connection: {
+      // database: 'goal_app'
       filename: './db.sqlite3'
     }
   },
