@@ -4,16 +4,17 @@ var env ='development'
 
 var conn =   {
   host: 'localhost',
-  user: 'student',
-  password: '',
-  filename: './db.sqlite3',
-  // database: 'goal_app',
+  user: 'root',
+  password: 'plantlife',
+  // filename: './db.sqlite3',
+  database: 'goal_app',
   charset: 'utf8'
 }
 var knex = require('knex')
 ({
     // TODO: ADD DATABASE CONNECTION INFO HERE
-  client: 'sqlite3',
+  // client: 'sqlite3',
+  client : 'mysql',
   connection: conn
 });
 

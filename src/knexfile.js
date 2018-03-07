@@ -2,10 +2,14 @@ module.exports = {
 
   development: {
     // TODO: ADD CONNECTION INFO
-    client: 'sqlite3',
+    // client: 'sqlite3',
+    client:'mysql',
     connection: {
-      // database: 'goal_app'
-      filename: './db.sqlite3'
+      host: 'localhost',
+      user: 'root',
+      password: 'plantlife',
+      database: 'goal_app'
+      // filename: './db.sqlite3'
     }
   },
   seeds: {
