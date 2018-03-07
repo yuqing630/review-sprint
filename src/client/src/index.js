@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GoalForm from './components/GoalsForm.js'
-import Goals from './components/Goals.js'
+import GoalsList from './components/GoalsList.js'
 
 class App extends React.Component{
   constructor(props) {
@@ -15,7 +15,7 @@ class App extends React.Component{
        <GoalForm />
      </div>
      <div>
-        <Goals/>
+        <GoalsList/>
      </div>
      </div>
    )
