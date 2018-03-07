@@ -8,6 +8,7 @@ class GoalsList extends React.Component{
     this.state = {
       post: []
     }
+    this.onClick=this.onClick.bind(this)
   }
 
   componentDidMount(){
@@ -22,16 +23,30 @@ class GoalsList extends React.Component{
       console.log(err, 'err getting mountdata')
     })
   }
-  // {this.state.post.map((goal,i)=>{
-  //   return(
-  //     <Goals data={goal.description} key={i}/>
-  //   )
-  // })}
+
+  onClick(){
+    axios.post('/complete')
+    .then((response)=>{
+      console.log('change')
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+
+  }
+
   render(){
     console.log(this.state.post)
     return(
       <div>
-  
+      {this.state.post.map((goal,i)=>{
+        console.log(goal)
+        return(
+          <div onClick={()=>{this.onClick()}}>{goal.description}
+          <button></button>
+          </div>
+        )
+      })}
 
       </div>
     )

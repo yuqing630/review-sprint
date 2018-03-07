@@ -15,6 +15,8 @@ router.get('/goals/id', goal.findByUserID)
 
 router.post('/goals', goal.addGoals)
 
+router.post('/complete', goal.update)
+
 router.post('/signup', function() {
   var username = req.body.username;
   var password = req.body.password;

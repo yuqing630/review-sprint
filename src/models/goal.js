@@ -39,4 +39,13 @@ Goal.findByUserID = function(req,res) {
     console.log(err, 'error getting by userid')
   })
 }
+Goal.update = function(req, res){
+  db('goals').where({id:1}).update({complete: true})
+  .then((response)=>{
+    res.end()
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+}
 module.exports = Goal;

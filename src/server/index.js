@@ -18,6 +18,8 @@ app.get('/goals/id', routes)
 
 app.post('/goals', routes)
 
+app.post('/complete', routes)
+
 app.get('/zen', function(req, res) {
   console.log(res)
   res.send('There are no accidents. - Master Oogway')
