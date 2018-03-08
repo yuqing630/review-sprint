@@ -26,9 +26,6 @@ Goal.findById = function(req,res) {
       console.error(err, 'error getting from db')
     });
 };
-// Goal.updateGoal = function(id) {
-//   return db('goal').where({id: id}).update({complete: 'true'})
-// }
 Goal.findByUserID = function(req,res) {
   // console.log(req)
   db('goals').where({user_id : 1}).select('*')
@@ -50,12 +47,22 @@ Goal.update = function(req, res){
   })
 }
 Goal.findByComplete = function(req, res) {
-  console.log('herer')
+  // console.log('herer')
   db('goals').where({complete: true}).select('*')
   .then(function(goal) {
     res.send(goal)
   })
   .catch(function(err){
+    console.log(err)
+  })
+}
+Goal.getDescription = function(req,res){
+  // console.log(req.query.id)
+  db('goals').where({id: req.query.id}).select('description')
+  .then((response)=>{
+    res.send(response)
+  })
+  .catch((err)=>{
     console.log(err)
   })
 }

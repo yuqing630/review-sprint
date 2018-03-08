@@ -18,6 +18,8 @@ router.post('/goals', goal.addGoals)
 
 router.post('/complete', goal.update)
 
+router.get('/description', goal.getDescription)
+
 router.post('/signup', function() {
   var username = req.body.username;
   var password = req.body.password;
