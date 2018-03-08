@@ -23,25 +23,29 @@ class GoalForm extends React.Component {
     })
   }
   handleSubmit(){
-  axios.post('/goals',{
-    data: this.state
-  })
-  .then((response)=>{
-    // console.log(this.props)
-    this.props.getData()
-    this.setState({
-      userInput: '',
-      userInputDesc: ''
+  if((this.state.userInput && this.state.userInputDesc) !== ''){
+    axios.post('/goals',{
+      data: this.state
     })
-  })
-  .catch((err)=>{
-    console.log(err, 'err save in to sever')
-  })
+    .then((response)=>{
+      // console.log(this.props)
+      this.props.getData()
+      this.setState({
+        userInput: '',
+        userInputDesc: ''
+      })
+    })
+    .catch((err)=>{
+      console.log(err, 'err save in to sever')
+    })
+  }
+
   }
 
 
   render(){
-  return (
+  
+    return (
     <div>
     What is your goal?
        <div>

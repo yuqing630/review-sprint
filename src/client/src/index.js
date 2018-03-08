@@ -5,7 +5,6 @@ import GoalsList from './GoalsList.js'
 import axios from 'axios'
 import { Switch, Route, Link } from 'react-router-dom'
 
-
 class Home extends React.Component{
   constructor(props) {
     super(props)
@@ -19,7 +18,6 @@ class Home extends React.Component{
   getData(){
     axios.get('/goals')
     .then((response)=>{
-      // console.log(response.data)
       this.setState({
         post: response.data
       })
@@ -33,10 +31,8 @@ class Home extends React.Component{
     this.getData()
   }
   onClick(id){
-    // console.log(id)
     axios.post('/complete', {id: id})
     .then((response)=>{
-      // console.log('change')
       axios.get('/goals')
       .then((response)=>{
         this.setState({
@@ -53,17 +49,12 @@ class Home extends React.Component{
      <div>
       <li><Link to='/'>Home</Link></li>
       <li><Link to='/Completed'>Complete Goal</Link></li>
-
        <h1>Goalposts</h1>
        <GoalForm getData = {this.getData}/>
-
         <GoalsList post={this.state.post} onClick = {this.onClick}/>
      </div>
-   )
- }
-
+     )
+   }
 }
-
-
 // ReactDOM.render(<Home />, document.getElementById('root'));
 export default Home;

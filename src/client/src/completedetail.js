@@ -7,7 +7,6 @@ class Detail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // description = ''
      description: ''
     }
   }
@@ -16,7 +15,6 @@ class Detail extends React.Component {
       {id:this.props.location.state.data}
     })
     .then((response)=>{
-      // console.log(response.data[0].description)
       this.setState({
         description:response.data[0].description
       })
@@ -24,11 +22,9 @@ class Detail extends React.Component {
     .catch((err)=>{
       console.log(err)
     })
-
   }
 
   render(){
-    // console.log(this.props.location.state.data)
     return(
       <div>
       <li><Link to='/'>Home</Link></li>

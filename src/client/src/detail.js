@@ -7,7 +7,6 @@ class Detail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // description = ''
      description: '',
      userInput: '',
      notes: []
@@ -20,18 +19,14 @@ class Detail extends React.Component {
       {id:this.props.location.state.data}
     })
     .then((response)=>{
-      // console.log(response.data[0].description)
-      // this.getPost(),
       this.setState({
         description:response.data[0].description
       })
       this.getPost()
-      // console.log(this.state)
     })
     .catch((err)=>{
       console.log(err)
     })
-    // this.getPost()
   }
   onChange(e){
     this.setState({
@@ -43,7 +38,6 @@ class Detail extends React.Component {
       id: this.props.location.state.data
     }})
     .then((response)=>{
-      // console.log(response.data)
       this.setState({
         notes: response.data
       })
@@ -59,7 +53,6 @@ class Detail extends React.Component {
       id: this.props.location.state.data
     })
     .then((response)=>{
-      // console.log('save in post')
       this.getPost()
       this.setState({
         userInput: ''
@@ -69,7 +62,6 @@ class Detail extends React.Component {
       console.log(err)
     })
   }
-
   render(){
     return(
       <div>
@@ -78,7 +70,7 @@ class Detail extends React.Component {
       <div>
       {this.state.description}
       <div>
-      <input type='text' value={this.state.userInput} placeholder='progress' onChange={(e)=>{this.onChange(e)}}></input>
+      <input type='text' value={this.state.userInput} placeholder='progress' onChange={(e)=>{this.onChange(e)}} validations="isExisty"></input>
       <button onClick={()=>{this.handleSubmit()}}>Submit</button>
       </div>
       Notes

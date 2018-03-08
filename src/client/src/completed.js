@@ -5,7 +5,6 @@ import CompletedGoalsList from './CompleteGoalList.js'
 import axios from 'axios'
 import { Switch, Route, Link } from 'react-router-dom'
 
-
 class Completed extends React.Component {
   constructor(props){
     super(props)
@@ -17,8 +16,6 @@ class Completed extends React.Component {
   componentDidMount(){
     axios.get('/Completed')
     .then((response)=>{
-      // console.log(response.data)
-
       this.setState({
         post: response.data
       })
