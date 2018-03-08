@@ -14,6 +14,11 @@ exports.up = function(knex, Promise) {
     table.string('title');
     table.string('description');
     table.boolean('complete')
+  }),
+  knex.schema.createTableIfNotExists('posts', function(table){
+    table.increments('id').primary().unsigned();
+    table.integer('goal_id');
+    table.string('post')
   })
 ])
   // TOD: CREATE ANY OTHER TABLES YOU NEED
@@ -24,7 +29,8 @@ exports.down = function(knex, Promise) {
 
   return Promise.all([
     knex.schema.dropTable('goals'),
-    knex.schema.dropTable('users')
+    knex.schema.dropTable('users'),
+    knex.schema.dropTable('posts')
 
   ])
 

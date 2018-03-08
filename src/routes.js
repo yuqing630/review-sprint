@@ -2,7 +2,8 @@ var router = require('express').Router();
 var jwt = require('jwt-simple'); // for encoding and decoding tokens
 var db = require('./models/db');
 var user = require('./models/user');
-var goal = require('./models/goal')
+var goal = require('./models/goal');
+var posts = require('./models/post')
 
 
 // TODO: ATTACH ROUTE HANDLERS
@@ -19,6 +20,10 @@ router.post('/goals', goal.addGoals)
 router.post('/complete', goal.update)
 
 router.get('/description', goal.getDescription)
+
+router.post('/post', posts.addPost)
+
+router.get('/post', posts.getPost)
 
 router.post('/signup', function() {
   var username = req.body.username;

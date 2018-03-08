@@ -4,8 +4,13 @@ var Goal = {};
 
 // TODO: ADD MORE MODEL FUNCTIONS HERE
 Goal.addGoals = function(req, res) {
-  console.log(req.body.data)
-  db('goals').insert({user_id: 1, title: req.body.data.userInput, description: req.body.data.userInputDesc, complete:false})
+  // console.log(req.body.data)
+  db('goals').insert({
+    user_id: 1,
+    title: req.body.data.userInput,
+    description: req.body.data.userInputDesc,
+    complete:false
+  })
   .then((response)=>{
     console.log('add to db goal')
     res.send()

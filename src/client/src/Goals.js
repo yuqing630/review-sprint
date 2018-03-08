@@ -24,6 +24,7 @@ class Goals extends React.Component {
     // console.log(this.state)
   }
   render(){
+    // console.log(this.props)
   if(this.state.show === true){
     return (
       <Redirect to={{
@@ -36,9 +37,9 @@ class Goals extends React.Component {
 
   return(
     <div>
-    <li onClick={()=> {this.handleClick(this.props.id)}}>{this.props.title}
+    <li onClick={()=> {this.handleClick(this.props.id)}}>{this.props.title}</li>
 
-    <button onClick={() => {this.props.onClick(this.props.id)}} >Completed</button></li>
+    <button onClick={() => {this.props.onClick(this.props.id)}} >Completed</button>
 
 
     </div>
