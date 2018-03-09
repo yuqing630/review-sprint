@@ -49,6 +49,8 @@ class Home extends React.Component{
      <div>
       <li><Link to='/'>Home</Link></li>
       <li><Link to='/Completed'>Complete Goal</Link></li>
+      <li><Link to='/login'>Login</Link></li>
+      <li><Link to='/signup'>Signup</Link></li>
        <h1>Goalposts</h1>
        <GoalForm getData = {this.getData}/>
         <GoalsList post={this.state.post} onClick = {this.onClick}/>

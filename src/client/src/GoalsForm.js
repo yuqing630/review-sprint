@@ -28,7 +28,6 @@ class GoalForm extends React.Component {
       data: this.state
     })
     .then((response)=>{
-      // console.log(this.props)
       this.props.getData()
       this.setState({
         userInput: '',
@@ -44,7 +43,7 @@ class GoalForm extends React.Component {
 
 
   render(){
-  
+
     return (
     <div>
     What is your goal?

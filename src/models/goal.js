@@ -2,9 +2,7 @@ var db = require('./db');
 
 var Goal = {};
 
-// TODO: ADD MORE MODEL FUNCTIONS HERE
 Goal.addGoals = function(req, res) {
-  // console.log(req.body.data)
   db('goals').insert({
     user_id: 1,
     title: req.body.data.userInput,
@@ -20,11 +18,8 @@ Goal.addGoals = function(req, res) {
   });
 };
 Goal.findById = function(req,res) {
-  // console.log(req, res)
-  // console.log(db)
   db('goals').where({complete: false}).select('*')
     .then(function(goal) {
-      // console.log(goal)
       res.send(goal)
     })
     .catch(function(err) {
@@ -32,7 +27,6 @@ Goal.findById = function(req,res) {
     });
 };
 Goal.findByUserID = function(req,res) {
-  // console.log(req)
   db('goals').where({user_id : 1}).select('*')
   .then(function(goal){
     res.send(goal)
@@ -42,7 +36,6 @@ Goal.findByUserID = function(req,res) {
   })
 }
 Goal.update = function(req, res){
-  // console.log(req.body.id)
   db('goals').where({id: req.body.id}).update({complete: true})
   .then((response)=>{
     res.send()
@@ -52,7 +45,6 @@ Goal.update = function(req, res){
   })
 }
 Goal.findByComplete = function(req, res) {
-  // console.log('herer')
   db('goals').where({complete: true}).select('*')
   .then(function(goal) {
     res.send(goal)
@@ -62,7 +54,6 @@ Goal.findByComplete = function(req, res) {
   })
 }
 Goal.getDescription = function(req,res){
-  // console.log(req.query.id)
   db('goals').where({id: req.query.id}).select('description')
   .then((response)=>{
     res.send(response)

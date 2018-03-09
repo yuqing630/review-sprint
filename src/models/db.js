@@ -1,7 +1,6 @@
 var config = require('../knexfile.js')
 var env ='development'
 
-
 var conn =   {
   host: 'localhost',
   user: 'root',
@@ -12,15 +11,9 @@ var conn =   {
 }
 var knex = require('knex')
 ({
-    // TODO: ADD DATABASE CONNECTION INFO HERE
   // client: 'sqlite3',
   client : 'mysql',
   connection: conn
 });
 
-
-// console.log(config)
-
 module.exports = knex;
-
-// knex.migrate.latest([config])

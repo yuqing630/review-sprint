@@ -4,30 +4,41 @@ var db = require('./models/db');
 var user = require('./models/user');
 var goal = require('./models/goal');
 var posts = require('./models/post')
-
-
-// TODO: ATTACH ROUTE HANDLERS
-  // See 2-complete-routes/README.md for which routes you should implement first.
+var jwt = require('jwt-simple')
 
 router.get('/goals', goal.findById)
-
 router.get('/Completed', goal.findByComplete)
-
 router.get('/goals/id', goal.findByUserID)
-
 router.post('/goals', goal.addGoals)
-
 router.post('/complete', goal.update)
-
 router.get('/description', goal.getDescription)
-
 router.post('/post', posts.addPost)
-
 router.get('/post', posts.getPost)
 
-router.post('/signup', function() {
+router.post('/signup', function(req,res) {
   var username = req.body.username;
   var password = req.body.password;
+  var secret = "xxx"
+  var token = jwt.encode(password, secret)
+  // console.log(user.checkUser(username,res), 'routes')
+  user.checkUser(username)
+  .then((response)=>{
+    // console.log(response, 'inroute')
+    if(!response.length){
+      console.log('here')
+      user.addUsername(username, token)
+    }
+    else{
+      return false
+    }
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+    // user.addUsername(username, token)
+
+
+
 
   // TODO: Complete the signup functionality:
     // Search for username

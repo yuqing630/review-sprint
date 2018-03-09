@@ -3,7 +3,6 @@ var db = require('./db');
 var Post = {};
 
 Post.addPost = function(req,res){
-  // console.log(req)
   db('posts').insert({
     goal_id: req.body.id,
     post: req.body.userInput
@@ -17,7 +16,6 @@ Post.addPost = function(req,res){
 }
 
 Post.getPost = function(req,res){
-  // console.log(req.query)
   db('posts').where({goal_id : req.query.id}).select('*')
   .then((response)=>{
     res.send(response)
