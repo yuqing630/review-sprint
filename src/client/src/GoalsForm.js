@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 class GoalForm extends React.Component {
   constructor(props){
@@ -25,10 +26,11 @@ class GoalForm extends React.Component {
   handleSubmit(){
   if((this.state.userInput && this.state.userInputDesc) !== ''){
     axios.post('/goals',{
-      data: this.state
+      data: this.state,
+      thing: this.props
     })
     .then((response)=>{
-      this.props.getData()
+      // this.props.getData()
       this.setState({
         userInput: '',
         userInputDesc: ''
@@ -43,9 +45,11 @@ class GoalForm extends React.Component {
 
 
   render(){
+    // console.log(this.props)
 
     return (
     <div>
+    <li><Link to='/'>Home</Link></li>
     What is your goal?
        <div>
       <input type='text' value={this.state.userInput} placeholder='Goal Name' onChange={(e)=>{this.handleChange(e)}}></input>

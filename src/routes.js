@@ -5,6 +5,7 @@ var user = require('./models/user');
 var goal = require('./models/goal');
 var posts = require('./models/post')
 var jwt = require('jwt-simple')
+var bcrypt = require('bcrypt')
 
 router.get('/goals', goal.findById)
 router.get('/Completed', goal.findByComplete)
@@ -20,26 +21,24 @@ router.post('/signup', function(req,res) {
   var password = req.body.password;
   var secret = "xxx"
   var token = jwt.encode(password, secret)
-  // console.log(user.checkUser(username,res), 'routes')
+
   user.checkUser(username)
   .then((response)=>{
-    // console.log(response, 'inroute')
     if(!response.length){
-      console.log('here')
-      user.addUsername(username, token)
+      // console.log('here')
+      bcrypt.hash(password, 10, ((err,hash)=>{
+        user.addUsername(username, hash)
+        res.sendStatus(201)
+      }))
+
     }
     else{
-      return false
+      res.sendStatus(409)
     }
   })
   .catch((err)=>{
     console.log(err)
   })
-    // user.addUsername(username, token)
-
-
-
-
   // TODO: Complete the signup functionality:
     // Search for username
     // If taken, send a 409 status code
@@ -47,9 +46,49 @@ router.post('/signup', function(req,res) {
       // Send back a 201
 });
 
-router.post('/login', function() {
+router.post('/login', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
+  var secret ="xxx"
+  // var token = jwt.encode(password, secret)
+  // var decode = jwt.decode(token, secret)
+  // console.log(decode)
+  // var hash = bcrypt.hash(password, 10, ((err,hash)=>{
+  //   return hash
+  // }))
+  // console.log(hash)
+
+  var checkPassword = function(username, password){
+    user.checkPassword(username, password)
+  }
+  // console.log(checkPassword(password), 'password')
+
+  user.checkUser(username)
+  .then((response)=>{
+    // console.log(response, 'in routes')
+    if(!response.length){
+      // console.log('here')
+      res.sendStatus(401)
+    }else{
+      // console.log(response[0].id)
+      bcrypt.hash(password, 10, ((err,hash)=>{
+        bcrypt.compare(password, hash, ((err, good)=>{
+          if(good){
+            var payload = {id: response[0].id}
+            // var secret
+            var token = jwt.encode(payload, secret)
+            res.send(token)
+          }else{
+            res.sendStatus(401)
+          }
+           }))
+
+      }))
+    }
+  })
+  .catch((err)=>{
+    console.log(err,'finding username')
+  })
 
   // TODO: Complete the login functionality:
     // Search for username

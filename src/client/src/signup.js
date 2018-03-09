@@ -1,12 +1,15 @@
 import React from 'react'
 import axios from 'axios'
+import {Redirect, Link} from 'react-router-dom'
+import Login from './login.js'
 
 class Signup extends React.Component{
   constructor(props){
     super(props)
     this.state={
       username: '',
-      password: ''
+      password: '',
+      auth: false,
     }
     this.handleSignup=this.handleSignup.bind(this)
   }
@@ -26,15 +29,38 @@ class Signup extends React.Component{
       password: this.state.password
     })
     .then((response)=>{
-      console.log('add',response)
+      // console.log(response)
+      if(response.data==='error'){
+      }else{
+        // console.log('new username')
+      this.setState({
+        auth: true
+      })
+      }
+
+
     })
     .catch((err)=>{
-      console.log(err, 'err send signup data')
+      this.setState({
+        username: '',
+        password: ''
+      })
+      console.log(err, 'Username Taken')
     })
   }
   render(){
+    // console.log(this.state.auth)
+    if(this.state.auth){
+      return (
+      <Redirect to ='/login'/>
+    )}
     return(
-      <div> Sign Up
+
+      <div>
+      <div>
+      <li><Link to='/login'>Login</Link></li>
+      </div>
+      Sign Up
       <div>
       <input type='text' value={this.state.username} placeholder='username' onChange={(e)=>{this.handleUserName(e)}}></input>
       </div>

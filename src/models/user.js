@@ -12,8 +12,9 @@ User.findByUsername = function(username) {
       console.error(err)
     });
 };
-User.addUsername = function(username, password) {
 
+User.addUsername = function(username, password) {
+  console.log(username, password)
   db('users').insert({username: username, password: password})
   .then((response)=>{
     console.log('add to db')
@@ -22,20 +23,35 @@ User.addUsername = function(username, password) {
     console.log(err, 'error saving in to db')
   })
 }
+
 User.checkUser = function(req){
-  // console.log(req, 'inmodel')
   return db('users').where({ username: req }).select('*')
   .then((response)=>{
-    // console.log(response)
    return response
   })
   .catch((err)=>{
     console.log(err)
-    // return false
   })
-//   knex.select('*').from('users').havingExists(function() {
-//   this.select('*').from('accounts').whereRaw('users.account_id = accounts.id');
-// })
-  // console.log('in model users')
+}
+User.login = function(username, password){
+  console.log(username, password)
+  return db('users').where({username:username, password:password}).select('*')
+  .then((response)=>{
+    console.log(response, 'in model')
+    return response
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+}
+User.checkPassword = function(password){
+  return db('users').where({password:password}).select('*')
+  .then((response)=>{
+    console.log(response, 'in model')
+    return response
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
 }
 module.exports = User;

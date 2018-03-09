@@ -3,8 +3,9 @@ var db = require('./db');
 var Goal = {};
 
 Goal.addGoals = function(req, res) {
+  console.log(req.body.thing.location.query.id.data.id)
   db('goals').insert({
-    user_id: 1,
+    user_id: req.body.thing.location.query.id.data.id,
     title: req.body.data.userInput,
     description: req.body.data.userInputDesc,
     complete:false
@@ -18,7 +19,8 @@ Goal.addGoals = function(req, res) {
   });
 };
 Goal.findById = function(req,res) {
-  db('goals').where({complete: false}).select('*')
+  // console.log(req, " in goal model")
+  db('goals').where({complete: false, user_id:req.query.id}).select('*')
     .then(function(goal) {
       res.send(goal)
     })
@@ -45,7 +47,7 @@ Goal.update = function(req, res){
   })
 }
 Goal.findByComplete = function(req, res) {
-  db('goals').where({complete: true}).select('*')
+  db('goals').where({complete: true, user_id:req.query.id}).select('*')
   .then(function(goal) {
     res.send(goal)
   })

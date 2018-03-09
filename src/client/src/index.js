@@ -14,9 +14,11 @@ class Home extends React.Component{
     this.onClick = this.onClick.bind(this)
     this.getData = this.getData.bind(this)
   }
-
+  // var data = this.props.location.state.data.id
   getData(){
-    axios.get('/goals')
+    axios.get('/goals',{params:{
+      id: this.props.location.state.data.id
+    }})
     .then((response)=>{
       this.setState({
         post: response.data
@@ -28,6 +30,7 @@ class Home extends React.Component{
   }
 
   componentDidMount(){
+    // console.log(this.props.location.state.data.id,"mounst")
     this.getData()
   }
   onClick(id){
@@ -45,14 +48,16 @@ class Home extends React.Component{
     })
   }
  render(){
+  //  console.log(this.props.location.state)
+
    return(
      <div>
       <li><Link to='/'>Home</Link></li>
-      <li><Link to='/Completed'>Complete Goal</Link></li>
+      <li><Link to='/Completed' >Complete Goal</Link></li>
       <li><Link to='/login'>Login</Link></li>
       <li><Link to='/signup'>Signup</Link></li>
+      <li><Link to={{ pathname: '/goalsform', query: { id: this.props.location.state } }}>Form</Link></li>
        <h1>Goalposts</h1>
-       <GoalForm getData = {this.getData}/>
         <GoalsList post={this.state.post} onClick = {this.onClick}/>
      </div>
      )
